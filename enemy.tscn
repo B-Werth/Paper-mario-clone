@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4acsk22vw0lg"]
+
+[ext_resource type="Texture2D" uid="uid://c1g7tx3q5nrmv" path="res://icon.svg" id="1_4ksap"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_ti5jq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0rbio"]
+
+[node name="enemy" type="Node3D"]
+script = ExtResource("1_ti5jq")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource("1_4ksap")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_0rbio")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

@@ -1,0 +1,55 @@
+[gd_scene load_steps=12 format=3 uid="uid://bthb02bpofu8o"]
+
+[ext_resource type="Texture2D" uid="uid://cddtbweoiqeal" path="res://Textures/1918721373_seamless bluestone rock texture, tiled, 4 k, high - rest, realistic, pbr, material.png" id="1_nbqkk"]
+[ext_resource type="PackedScene" uid="uid://bt3muf1eq3pyy" path="res://player.tscn" id="2_b6hye"]
+[ext_resource type="Script" path="res://stats.gd" id="3_5swrg"]
+[ext_resource type="PackedScene" uid="uid://d4acsk22vw0lg" path="res://enemy.tscn" id="3_tp7lw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fxcc7"]
+albedo_texture = ExtResource("1_nbqkk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rwcfq"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vdwwl"]
+material = SubResource("StandardMaterial3D_rwcfq")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3q44w"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_qyjlb"]
+
+[sub_resource type="Sky" id="Sky_t1s45"]
+sky_material = SubResource("PhysicalSkyMaterial_qyjlb")
+
+[sub_resource type="Environment" id="Environment_qbuhn"]
+background_mode = 2
+sky = SubResource("Sky_t1s45")
+
+[node name="World" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(12.5428, 0, 0, 0, 1, 0, 0, 0, 12.8035, 0.251506, 0.633485, 0.62012)
+material_override = SubResource("StandardMaterial3D_fxcc7")
+mesh = SubResource("BoxMesh_vdwwl")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_3q44w")
+
+[node name="Player" parent="." instance=ExtResource("2_b6hye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.377975, 4.82609, -2.08287)
+script = ExtResource("3_5swrg")
+
+[node name="Label" parent="Player/Character/Control" index="0"]
+layout_mode = 0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qbuhn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0106637, 0.999943, 0, -0.999943, -0.0106637, 0, 12.0492, 0)
+
+[node name="enemy" parent="." instance=ExtResource("3_tp7lw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34788, 1.95445, 1.70515)
+
+[editable path="Player"]

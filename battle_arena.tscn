@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5opr6ka0ma3l"]
+
+[ext_resource type="Texture2D" uid="uid://bwet51tmsi25w" path="res://Textures/1037824387_black Sliced square Tile Concrete Panels, raytracing, 8k, octane render, volumetric, vivid, beautiful, hyperrealism.png" id="1_qu4mw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lr51j"]
+albedo_texture = ExtResource("1_qu4mw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vxeu7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5aps2"]
+material = SubResource("StandardMaterial3D_vxeu7")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jt464"]
+
+[node name="BattleArena" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(12.5428, 0, 0, 0, 1, 0, 0, 0, 12.8035, 0, 0, 0.62012)
+material_override = SubResource("StandardMaterial3D_lr51j")
+mesh = SubResource("BoxMesh_5aps2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_jt464")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19941, 7.85616)
